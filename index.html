@@ -1,13 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-</head>
-<body>
-    <div>
-        <a href="active.php"><button>active</button></a>
-    </div>
-</body>
-</html>
+<?php
+ require_once('api.php');
+ $API = new RouterosAPI();
+
+$ip = strip_tags($_POST['ip']);
+$user = strip_tags($_POST['user']);
+$password = strip_tags($_POST['password']);
+
+if ($API->connect("$ip", "$user", "$password")) {
+    $respones = [
+        "status"=> true,
+        "msg"=>"good"
+    ];
+
+    print_r(json_encode($respones));
+
+} else {
+   
+
+    $respones = [
+        "status"=> false,
+        "msg"=>"no user name or password"
+    ];
+    print_r(json_encode($respones));
+}
+
+
+
+?>
